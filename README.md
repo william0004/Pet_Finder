@@ -4,7 +4,7 @@ Submitted by: **Yaowei Lei**
 
 This web app: **PetPals is an intuitive adoption platform that helps you quickly find your perfect furry friend. Browse, filter, and learn about pets available for adoption — making it easier to give every pet a loving home.**
 
-Time spent: **X** hours spent in total
+Time spent: **21** hours spent in total
 
 ## Required Features
 
