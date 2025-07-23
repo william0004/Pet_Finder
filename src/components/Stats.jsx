@@ -1,5 +1,7 @@
 // src/components/Stats.jsx
-function Stats({ data }) {
+import Charts from './Charts';
+
+function Stats({ data, animals}) {
   const total = data.length;
 
   const avgAge = total > 0
@@ -16,9 +18,14 @@ function Stats({ data }) {
 
   return (
     <div className="stats-container">
-      <div className="stats-item stats-total">Total: <strong>{total}</strong></div>
-      <div className="stats-item stats-age">Average Age Estimate (years): <strong>{avgAge}</strong></div>
-      <div className="stats-item stats-gender">Gender Ratio: <strong>{maleCount} ♂ / {femaleCount} ♀</strong></div>
+      <div className="stats-data">
+        <div className="stats-item stats-total">Total Pets: <strong>{total}</strong></div>
+        <div className="stats-item stats-age">Average Age Estimate (years): <strong>{avgAge}</strong></div>
+        <div className="stats-item stats-gender">Gender Ratio: <strong>{maleCount} ♂ / {femaleCount} ♀</strong></div>
+      </div>
+      <div className="stats-charts">
+        <Charts animals={animals} />
+      </div>
     </div>
   );
 }

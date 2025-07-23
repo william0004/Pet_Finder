@@ -7,31 +7,105 @@ body {
   color: #2d3748;
 }
 
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/************* Sidebar *************/
+.sidebar {
+  width: 220px;
+  background: #89bfe3;
+  padding: 32px 0;
+  min-height: 100vh;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 16px 32px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.sidebar li:hover {
+  background: #6190b7;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/************** App ***************/
 .container {
   display: flex;
   flex-direction: column;
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  flex: 1;
+  margin-left: 220px;
+  margin-right: 280px;
+  padding: 32px;
 }
 
+.stats-panel {
+  width: 280px;
+  background: #e1eaea;
+  padding: 32px 0;
+  min-height: 100vh;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.04);
+  position: fixed;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .title {
   font-size: 3.5rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: #2b6cb0;
 }
 
 .intro {
   font-size: 1.1rem;
   text-align: center;
-  margin-bottom: 2rem;
   color: #4a5568;
-  margin: 5% 10%;
+  margin: 2rem 10%;
 }
 
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/************* SearchBar *************/
 .search-input {
   width: 100%;
   max-width: 400px;
@@ -50,7 +124,7 @@ body {
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
 }
 
-
+/************* Filters *************/
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -73,13 +147,12 @@ body {
   cursor: pointer;
 }
 
-
+/************* Dashboard *************/
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
 }
-
 
 .animal-card {
   background-color: white;
@@ -87,18 +160,44 @@ body {
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   transition: transform 0.2s ease;
 }
 
 .animal-card:hover {
-  transform: translateY(-4px);
+  transform: scale(1.05);
+}
+
+.animal-card-info {
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.animal-image-pre {
+  width: auto;
+  height: 120px;
+  object-Fit: cover;
+  border-Radius: 8px;
+  margin-Bottom: 8px;
+  text-align: center;
 }
 
 .animal-image {
-  width: 100%;
-  height: 180px;
+  width: auto;
+  height: 300px;
   object-fit: cover;
   background-color: #edf2f7;
+}
+
+.no-animal-image {
+  margin: 2rem;
+  text-align: center;
+  color: #a0aec0;
+  font-size: 1rem;
 }
 
 .animal-info {
@@ -121,17 +220,20 @@ body {
   color: #4a5568;
 }
 
-
+/************* Stats  *************/
 .stats-container {
+  margin-top: 20%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  background-color: #edf2f7;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.stats-data {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
 }
 
 .stats-item {
@@ -152,28 +254,19 @@ body {
   color: #d53f8c;
 }
 
-.pagination {
+
+/******************** Charts ******************/
+.charts-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.chart-block {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  margin: 1.5rem 0;
 }
 
-.pagination button {
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #4caf50;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.pagination button[disabled] {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.pagination span {
-  font-weight: bold;
+.chart-block h3 {
+  margin-bottom: 16px;
 }

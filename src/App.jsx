@@ -1,9 +1,12 @@
 // src/App.jsx
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AnimalDetail from './components/AnimalDetail';
 import SearchBar from './components/SearchBar';
 import Filters from './components/Filters';
 import Stats from './components/Stats';
 import Dashboard from './components/Dashboard';
+import Sidebar from './components/Sidebar';
 import './App.css';
 
 const CLIENT_ID = import.meta.env.VITE_PETFINDER_API_KEY;
@@ -42,6 +45,7 @@ function App() {
         const animalData = await animalRes.json();
         setAnimals(animalData.animals);
         setFilteredAnimals(animalData.animals);
+        console.log('API response:', animalData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -84,30 +88,51 @@ function App() {
 
 
   return (
-    <div className="container">
-      <h1 className="title">🐾 Pet Pals</h1>
-      <p className='intro'>PetPals is an intuitive adoption platform that helps you quickly find your perfect furry friend. Browse, filter, and learn about pets available for adoption — making it easier to give every pet a loving home.</p>
-      <SearchBar value={searchQuery} onChange={setSearchQuery} />
-      <Filters
-        species={speciesFilter}
-        setSpecies={setSpeciesFilter}
-        age={ageFilter}
-        setAge={setAgeFilter}
-        gender={genderFilter}
-        setGender={setGenderFilter}
-      />
-      <Stats data={filteredAnimals} />
-      <Dashboard animals={currentAnimals} />
-      <div className="pagination">
-        <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
-          ⬅ Previous
-        </button>
-        <span>Page {currentPage} of {totalPages}</span>
-        <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>
-          Next ➡
-        </button>
+    <Router>
+      <div className="layout">
+        <Sidebar />
+        <div className="stats-panel">
+          <Stats data={filteredAnimals} animals={animals}/>
+        </div>
+        <div className="container">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <h1 className="title">🐾 Pet Pals</h1>
+                  <p className='intro'>PetPals is an intuitive adoption platform that helps you quickly find your perfect furry friend. Browse, filter, and learn about pets available for adoption — making it easier to give every pet a loving home.</p>
+                  <SearchBar value={searchQuery} onChange={setSearchQuery} />
+                  <Filters
+                    species={speciesFilter}
+                    setSpecies={setSpeciesFilter}
+                    age={ageFilter}
+                    setAge={setAgeFilter}
+                    gender={genderFilter}
+                    setGender={setGenderFilter}
+                  />
+                  
+                  <Dashboard animals={currentAnimals} />
+                  <div className="pagination">
+                    <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
+                      ⬅ Previous
+                    </button>
+                    <span>Page {currentPage} of {totalPages}</span>
+                    <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>
+                      Next ➡
+                    </button>
+                  </div>
+                </>
+              }
+            />
+            <Route
+              path="/animal/:id"
+              element={<AnimalDetail animals={animals} />}
+            />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
